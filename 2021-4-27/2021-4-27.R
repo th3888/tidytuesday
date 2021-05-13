@@ -1,5 +1,6 @@
 library(tidyverse)
 library(skimr)
+library(wordcloud)
 
 CEO <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-27/departures.csv")
 
@@ -17,3 +18,4 @@ CEO <- CEO %>%
                                     departure_code == 5 ~ "Retired",
                                     departure_code == 6 ~ "New opportunity",
                                     departure_code == 7 ~ "Other"))
+
