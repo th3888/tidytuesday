@@ -19,3 +19,6 @@ CEO <- CEO %>%
                                     departure_code == 6 ~ "New opportunity",
                                     departure_code == 7 ~ "Other"))
 
+
+CEO %>% 
+  mutate()
