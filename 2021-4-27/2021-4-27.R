@@ -1,6 +1,5 @@
 library(tidyverse)
 library(skimr)
-library(wordcloud)
 
 CEO <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-04-27/departures.csv")
 
@@ -8,7 +7,7 @@ CEO <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/m
 skim(CEO)
 
 #from departure code to  classifications
-CEO <- CEO %>% 
+CEO_dep <- CEO %>% 
   filter(!is.na(departure_code),
          departure_code %in% 1:7) %>% 
   mutate(departure_code = case_when(departure_code == 1 ~ "Death",
@@ -20,5 +19,16 @@ CEO <- CEO %>%
                                     departure_code == 7 ~ "Other"))
 
 
-CEO %>% 
-  mutate()
+CEO_dep %>% 
+  mutate(dismissal = ifelse(ceo_dismissal == 1,
+                            "dismissal",
+                            "not dismissal")) %>% 
+  filter(fyear > 1995, fyear < 2019) %>% 
+  count(fyear, dismissal) %>% 
+  ggplot(aes(fyear, n, color = dismissal)) + 
+  geom_line(size = 1, alpha = 0.5) + 
+  geom_point(size = 1.5) +
+  geom_smooth(method = "lm", lty = 2) +
+  scale_y_continuous(limits = c(0, NA)) +
+  labs(x = "Year", y = "Number of CEO departures") +
+  ggsave("2021-4-27/output/fig1.png")
