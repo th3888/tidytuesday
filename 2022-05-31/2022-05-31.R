@@ -16,5 +16,5 @@ poll_avg %>%
   geom_text(data = poll_avg %>% filter(year == 2017),
             aes(year, avg_rq, color = industry, label = industry),
             size = 2.75) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "none")
   
