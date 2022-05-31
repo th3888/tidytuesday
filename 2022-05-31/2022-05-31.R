@@ -12,5 +12,5 @@ poll_avg %>%
   ggplot() + 
   geom_line(aes(x = year, y = avg_rq, group = industry)) + 
   geom_text(data = poll_avg %>% filter(year == 2017),
-            aes(color = industry, label = industry))
+            aes(year, avg_rq, color = industry, label = industry))
   
