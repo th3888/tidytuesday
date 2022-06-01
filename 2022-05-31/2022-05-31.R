@@ -15,7 +15,7 @@ theme_set(theme_economist())
 poll_avg %>% 
   ggplot() + 
   geom_line(aes(x = year, y = avg_rq, color = industry)) + 
-  geom_text(data = poll_avg %>% filter(year == 2017),
+  ggrepel::geom_text_repel(data = poll_avg %>% filter(year == 2017),
             aes(year, avg_rq, color = industry, label = industry),
             size = 3.5) +
   theme(legend.position = "none")
