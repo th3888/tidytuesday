@@ -1,5 +1,6 @@
 library(tidyverse)
 library(ggthemes)
+library(RColorBrewer)
 
 poll <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-05-31/poll.csv')
 reputation <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-05-31/reputation.csv')
@@ -10,11 +11,12 @@ poll_avg <- poll %>%
   filter(!is.na(avg_rq))
 
 theme_set(theme_economist())
+
 poll_avg %>% 
   ggplot() + 
   geom_line(aes(x = year, y = avg_rq, color = industry)) + 
   geom_text(data = poll_avg %>% filter(year == 2017),
             aes(year, avg_rq, color = industry, label = industry),
-            size = 2.75) +
+            size = 3.5) +
   theme(legend.position = "none")
   
