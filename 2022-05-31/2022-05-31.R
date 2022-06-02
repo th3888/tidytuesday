@@ -18,5 +18,6 @@ poll_avg %>%
   ggrepel::geom_text_repel(data = poll_avg %>% filter(year == 2017),
             aes(year, avg_rq, color = industry, label = industry),
             size = 3.5) +
+  cowplot::theme_minimal_grid(14) +
   theme(legend.position = "none")
   
