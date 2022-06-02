@@ -15,9 +15,11 @@ theme_set(theme_economist())
 poll_avg %>% 
   ggplot() + 
   geom_line(aes(x = year, y = avg_rq, color = industry)) + 
+  geom_point(data = poll_avg %>% filter(year == 2017),
+             aes(year, avg_rq, color = industry)) +
   ggrepel::geom_text_repel(data = poll_avg %>% filter(year == 2017),
             aes(year, avg_rq, color = industry, label = industry),
             size = 3.5) +
   cowplot::theme_minimal_grid(13) +
-  theme(legend.position = "none")
+  theme(legend.position = "none") 
   
